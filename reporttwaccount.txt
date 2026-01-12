@@ -1,0 +1,2 @@
+Bank report11-01-2026 23:53:17-------------------------------------------------
+Dateandd time11-01-2026 23:53:17fromaccount65201003ToAccountnullBalance11000.0Depsit or withdrawdepositAmount(Deposit or withdraw5000.0statusCompleted-------------------------------------------------

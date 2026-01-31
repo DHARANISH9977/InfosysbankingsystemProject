@@ -1,11 +1,9 @@
 package com.infosys.bankingsystem.Controller;
 
 import com.infosys.bankingsystem.Entity.Account;
-import com.infosys.bankingsystem.Repository.AccountR;
 import com.infosys.bankingsystem.Service.AccountS;
 import com.infosys.bankingsystem.Service.AlertGmailS;
 import com.infosys.bankingsystem.helpher.utilforalert;
-import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,10 +44,13 @@ public class AccountC {
     {
         return aservice.deleteacc(id);
     }
+    // low balnces alert email
     @GetMapping("/lowbalance")
     public List<Account> getLowBalanceAccounts() {
         return ufa.findLowBalance();
     }
+
+   // use to get an csv  for view account statment
     @GetMapping("/csv")
     public String csv() throws IOException {
         Path p= Path.of("BankReport.csv");

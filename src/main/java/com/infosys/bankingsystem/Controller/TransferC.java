@@ -6,6 +6,7 @@ import com.infosys.bankingsystem.Service.TransferS;
 import com.infosys.bankingsystem.exceptions.AccountNotFoundException;
 import com.infosys.bankingsystem.exceptions.InsufficientBalanceException;
 import com.infosys.bankingsystem.exceptions.InvalidAmountException;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -19,7 +20,7 @@ public class TransferC {
 
     @PostMapping("/depositwithdraw/{accno}")
 
-    public void depositwithdraw(@RequestBody Tranfer t, @PathVariable int accno) throws InvalidAmountException, AccountNotFoundException {
+    public void depositwithdraw(@RequestBody Tranfer t, @PathVariable int accno) throws InvalidAmountException, AccountNotFoundException, MessagingException {
         trans.depositwithdraw(t, accno);
     }
     @GetMapping("/checkbalance/{a1}")

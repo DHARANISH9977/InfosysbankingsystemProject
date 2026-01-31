@@ -7,15 +7,17 @@ public class Account {
 @Id
 @GeneratedValue
     int accid;
-// link from customer
 @Column(unique = true, nullable = false)
-long accno;
+    long accno;
+    @Column(unique = true, nullable = false)
+    String email;
     String accounttype;
     //@NotBlank
+    //automatically sets in db
     String ifsccode="IOBA0000365";
     String bankname="TAMILNADU BANK";
     String bankaddress="TMB MAIN BRANCH ADAYAR CHENNAI ";
-   @NotNull
+    @NotNull
     double balance;
     String status;
 
@@ -82,8 +84,7 @@ long accno;
     public void setStatus(String status) {
         this.status = status;
     }
-    //dummy email
-    String email;
+
 
     public String getEmail() {
         return email;
@@ -92,8 +93,9 @@ long accno;
     public void setEmail(String email) {
         this.email = email;
     }
-    @OneToOne()
-    @JoinColumn(name = "customer_id")
-    Customer cust;
+
+    //@OneToOne(mappedBy = "acc")
+    //Customer cust;
+
 }
 

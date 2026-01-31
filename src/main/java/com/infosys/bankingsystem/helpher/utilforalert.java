@@ -1,8 +1,6 @@
 package com.infosys.bankingsystem.helpher;
 import com.infosys.bankingsystem.Entity.Account;
 import com.infosys.bankingsystem.Repository.AccountR;
-import com.infosys.bankingsystem.Controller.AccountC;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +14,21 @@ import org.springframework.stereotype.Service;
 public class utilforalert {
 
     @Autowired
-    AccountR accr;
+  AccountR accr;
     @Autowired
     AlertGmailS ags;
-    @Scheduled(fixedRate =  60000)
+
+    List<String> sent=new ArrayList<>();
+    @Scheduled(fixedRate =  9*60*1000)
     void check() throws MessagingException {
+
         List<Object[]>emailslist=accr.balancelow();
-       for(Object[]all:emailslist)
-       {
-           String gmail=all[0].toString();
-           double balance=Double.parseDouble(all[1].toString());
-           System.out.println("gmail"+gmail+""+balance);
-           ags.balancelow(gmail,balance);
+       for(Object[]all:emailslist) {
+           String gmail = all[0].toString();
+           double balance = Double.parseDouble(all[1].toString());
+           System.out.println("gmail" + gmail + "" + balance);
+           ags.balancelow(gmail, balance);
+
        }
     }
     public List<Account> findLowBalance() {

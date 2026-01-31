@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5500")
+@CrossOrigin(origins = "*")
 @RequestMapping("/customer")
 public class CustomerC {
 
@@ -18,7 +18,7 @@ public class CustomerC {
         return cusS.showdetails(id);
     }
     @PostMapping("/addc")
-    public Customer add(@RequestBody Customer add)
+    public String add(@RequestBody Customer add)
     {
         return cusS.adddetails(add);
     }

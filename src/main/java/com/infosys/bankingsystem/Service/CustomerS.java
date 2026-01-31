@@ -1,23 +1,46 @@
 package com.infosys.bankingsystem.Service;
 
 import com.infosys.bankingsystem.Entity.Customer;
+import com.infosys.bankingsystem.Repository.AccountR;
 import com.infosys.bankingsystem.Repository.CustomerR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.infosys.bankingsystem.Entity.Account;
 @Service
 public class CustomerS {
 
     @Autowired
     CustomerR cusr;
+
+    //findbyemail, findby accno used from account repo (i)
+    @Autowired
+    AccountR accr;
+
+
+
     public Customer showdetails(int id)
     {
         return cusr.getById(id);
     }
 
-    public Customer adddetails(Customer cus)
+    public String adddetails(Customer cus)
+
     {
-        return cusr.save(cus);
+        long accno=cus.getAcc().getAccno();
+        String accemail= accr.findbyemail(accno);  //(i)
+
+        Account acc=accr.findByAccno(accno); //(i)
+        if (accemail== null) {
+            return "Account not found";
+        }
+         if(!accemail.equals(cus.getEmail()))
+         {
+              return "Email not matches with account";
+         }
+         cus.setAcc(acc);
+         cusr.save(cus);
+         return "suceess";
+
     }
     public String deletedetails(int id)
     {

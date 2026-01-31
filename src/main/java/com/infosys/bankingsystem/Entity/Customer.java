@@ -15,14 +15,22 @@ public class Customer {
     String dob;
     @Email
     String email;
-    //link with account no
     @Column(unique = true)
     @Size(min=8,max=10)
-    int phoneno;
+    String phoneno;
     String address;
     @Size(min=5,max=6)
-    int pincode;
+    String pincode;
     int createdat;
+
+   // public long getAccno() {
+     //   return accno;
+    //}
+
+    //public void setAccno(long accno) {
+      //  this.accno = accno;
+   // }
+
     public int getCusid() {
         return cusid;
     }
@@ -55,11 +63,11 @@ public class Customer {
         this.email = email;
     }
 
-    public int getPhoneno() {
+    public String getPhoneno() {
         return phoneno;
     }
 
-    public void setPhoneno(int phoneno) {
+    public void setPhoneno(String phoneno) {
         this.phoneno = phoneno;
     }
 
@@ -71,11 +79,11 @@ public class Customer {
         this.address = address;
     }
 
-    public int getPincode() {
+    public String getPincode() {
         return pincode;
     }
 
-    public void setPincode(int pincode) {
+    public void setPincode(String pincode) {
         this.pincode = pincode;
     }
 
@@ -87,9 +95,17 @@ public class Customer {
         this.createdat = createdat;
     }
 
-    @OneToOne(mappedBy = "cust")
-    private Account acc;
+    // JOIN FROM CUSTOMER TO ACCOUNT MAPPING
+    @OneToOne
+    @JoinColumn(name="accid",referencedColumnName = "accid",nullable = false)
+    public Account acc;
 
+    public Account getAcc() {
+        return acc;
+    }
 
+    public void setAcc(Account acc) {
+        this.acc = acc;
+    }
 }
 

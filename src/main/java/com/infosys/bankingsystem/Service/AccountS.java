@@ -43,7 +43,7 @@ public class AccountS {
 
     public  Double deposit(int accno)
     {
-        return accr.getbalances(accno);
+        return accr.checkbalance(accno);
     }
 
 }

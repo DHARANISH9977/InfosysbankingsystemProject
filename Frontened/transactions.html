@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transactions - Banking System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <span>Tamil Nadu Bank</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="accounts.html"><i class="fas fa-wallet"></i> Accounts</a></li>
+                <li><a href="customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                <li><a href="transactions.html" class="active"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                <li><a href="transfer.html"><i class="fas fa-money-bill-transfer"></i> Transfer</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1><i class="fas fa-exchange-alt"></i> Transactions</h1>
+        
+        <div class="dashboard">
+            <div class="card">
+                <h2><i class="fas fa-money-bill-wave"></i> Deposit Money</h2>
+                <div class="form-group">
+                    <label for="depositAccountNo"><i class="fas fa-credit-card"></i> Account Number:</label>
+                    <input type="number" id="depositAccountNo" placeholder="Enter account number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="depositAmount"><i class="fas fa-money-bill"></i> Amount:</label>
+                    <input type="number" step="0.01" id="depositAmount" placeholder="Enter amount">
+                </div>
+                
+                <button onclick="performDeposit()" class="btn btn-success">
+                    <i class="fas fa-plus-circle"></i> Deposit
+                </button>
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-hand-holding-usd"></i> Withdraw Money</h2>
+                <div class="form-group">
+                    <label for="withdrawAccountNo"><i class="fas fa-credit-card"></i> Account Number:</label>
+                    <input type="number" id="withdrawAccountNo" placeholder="Enter account number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="withdrawAmount"><i class="fas fa-money-bill"></i> Amount:</label>
+                    <input type="number" step="0.01" id="withdrawAmount" placeholder="Enter amount">
+                </div>
+                
+                <button onclick="performWithdraw()" class="btn btn-warning">
+                    <i class="fas fa-minus-circle"></i> Withdraw
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-history"></i> Transaction Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Deposit Process</h3>
+                    <p>Enter account number and amount to deposit money into the account</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Withdrawal Rules</h3>
+                    <p>Minimum balance must be maintained. Low balance alerts are sent via email</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Security</h3>
+                    <p>All transactions are secured and logged for audit purposes</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Tamil Nadu Bank. All rights reserved.</p>
+            <p>Secure Banking System | IFSC: IOBA0000365</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function performDeposit() {
+            const accountNo = document.getElementById('depositAccountNo').value;
+            const amount = document.getElementById('depositAmount').value;
+            
+            if (!accountNo || !amount) {
+                alert('Please enter account number and amount');
+                return;
+            }
+            
+            document.getElementById('transAccountNo').value = accountNo;
+            document.getElementById('amount').value = amount;
+            performTransaction('deposit');
+        }
+        
+        function performWithdraw() {
+            const accountNo = document.getElementById('withdrawAccountNo').value;
+            const amount = document.getElementById('withdrawAmount').value;
+            
+            if (!accountNo || !amount) {
+                alert('Please enter account number and amount');
+                return;
+            }
+            
+            document.getElementById('transAccountNo').value = accountNo;
+            document.getElementById('amount').value = amount;
+            performTransaction('withdraw');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<button onclick="loadCSV()">View Bank Report</button>
+
+<pre id="csvBox"></pre>
+
+<script>
+function loadCSV() {
+    fetch("http://localhost:8080/Account/csv")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("csvBox").innerText = data;
+        });
+}
+</script>

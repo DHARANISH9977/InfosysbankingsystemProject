@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Management</title>
+    <link rel="stylesheet" href="css/customer.css">
+</head>
+<body>
+
+<h1>Customer Management</h1>
+
+<div class="card">
+    <h2>Add Customer</h2>
+
+    <input id="name" placeholder="Customer Name">
+    <input id="email" placeholder="Email">
+    <input id="phone" placeholder="Phone Number">
+    <input id="address" placeholder="Address">
+    <input id="pincode" placeholder="Pincode">
+
+    <hr>
+
+    <h3>Account Verification</h3>
+    <input id="accno" placeholder="Account Number">
+
+    <button onclick="addCustomer()">Add Customer</button>
+    <p id="msg"></p>
+</div>
+
+<div class="card">
+    <h2>All Customers</h2>
+    <button onclick="loadCustomers()">Show All</button>
+    <div id="customerList"></div>
+</div>
+
+<script src="customer.js"></script>
+</body>
+</html>

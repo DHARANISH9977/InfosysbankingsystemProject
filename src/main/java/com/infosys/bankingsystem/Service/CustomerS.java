@@ -6,6 +6,9 @@ import com.infosys.bankingsystem.Repository.CustomerR;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.infosys.bankingsystem.Entity.Account;
+
+import java.util.List;
+
 @Service
 public class CustomerS {
 
@@ -17,6 +20,10 @@ public class CustomerS {
     AccountR accr;
 
 
+    public List<Customer> getall()
+    {
+        return cusr.findAll();
+    }
 
     public Customer showdetails(int id)
     {

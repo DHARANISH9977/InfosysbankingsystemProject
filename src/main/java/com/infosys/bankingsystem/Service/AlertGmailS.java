@@ -35,7 +35,7 @@ public class AlertGmailS {
         String emailto= accr.findbyemail(accno);
         MimeMessage message=msend.createMimeMessage();
         MimeMessageHelper helper=new MimeMessageHelper(message,true);
-        helper.setFrom("dharanishvijyakumar181@gmail.com");
+        helper.setFrom("dharanishvijaykumar181@gmail.com");
         helper.setTo(emailto);
         helper.setSubject("Banking application email");
         helper.setText("From the account "+accno+ "amount of $" +amt +"was "+check+ "current balance was "+bal);

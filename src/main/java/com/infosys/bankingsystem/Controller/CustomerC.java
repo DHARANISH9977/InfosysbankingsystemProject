@@ -5,13 +5,20 @@ import com.infosys.bankingsystem.Service.CustomerS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/customer")
 public class CustomerC {
 
     @Autowired
     CustomerS cusS;
+    @GetMapping("/all")
+    public List<Customer> getall()
+    {
+        return cusS.getall();
+    }
     @GetMapping("/detailc/{id}")
     public Customer showdetails(@PathVariable int id)
     {

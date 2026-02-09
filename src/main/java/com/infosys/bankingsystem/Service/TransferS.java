@@ -8,6 +8,7 @@ import com.infosys.bankingsystem.exceptions.AccountNotFoundException;
 import com.infosys.bankingsystem.exceptions.InsufficientBalanceException;
 import com.infosys.bankingsystem.exceptions.InvalidAmountException;
 import jakarta.mail.MessagingException;
+import jakarta.transaction.SystemException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,9 +48,14 @@ public class TransferS {
             balancesA += tt.getBalance();
             accr.updateBalance(balancesA, accno);
             System.out.print("the accno" + balancesA);
-            check="Completed";
-            CSVReportCreation .twoacount(accno,null,tranferamt,balancesA,type,check);
-            ags.transferamt(type,tranferamt,accno,balancesA);
+            check = "Completed";
+            CSVReportCreation.twoacount(accno, null, tranferamt, balancesA, type, check);
+            try {
+                ags.transferamt(type, tranferamt, accno, balancesA);
+            } catch (Exception e)
+            {
+                System.out.println("Email failed but deposit success");
+            }
         }
         //withdraw
         else if ("withdraw".equals(tt.getCheck())) {
@@ -84,17 +90,31 @@ public class TransferS {
     public void transfer(int a1,int a2,double amt) throws InsufficientBalanceException {
         //accr.transfer(a1,a2,amt);
         //List<Double>bal=accr.transfer(a1,a2,amt);
-        double balacc1 = accr.checkbalance(a1);
-        double balacc2 = accr.checkbalance(a2);
+        Double balacc1 = accr.checkbalance(a1);
+        Double balacc2 = accr.checkbalance(a2);
+        if(balacc1 == null || balacc2 == null)
+        {
+            throw new InsufficientBalanceException("Account not found");
+        }
         if (balacc1 < amt) {
             check = "Uncomplete";
-            CSVReportCreation .twoacount(a1,a2,amt,null,null,check);
-            throw new InsufficientBalanceException("Cannot amount to be tranfer less then" + amt);
+            try {
+                CSVReportCreation.twoacount(a1, a2, amt, null, null, check);
+            }
+            catch (Exception e)
+            {
+                System.out.println("CSV  failed");
+            }
+            throw new InsufficientBalanceException("Insufficient balance");
         } else {
             balacc1 -= amt;
             balacc2 += amt;
             check = "Complete";
+            try {
             CSVReportCreation .twoacount(a1,a2,amt,balacc1,null,check);
+            } catch (Exception e) {
+                System.out.println("CSV failed but transfer success");
+            }
             accr.updateBalance(balacc1, a1);
             accr.updateBalance(balacc2, a2);
         }

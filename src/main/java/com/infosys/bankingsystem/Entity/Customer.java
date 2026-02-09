@@ -96,7 +96,7 @@ public class Customer {
     }
 
     // JOIN FROM CUSTOMER TO ACCOUNT MAPPING
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="accid",referencedColumnName = "accid",nullable = false)
     public Account acc;
 

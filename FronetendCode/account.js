@@ -22,31 +22,26 @@ function createAccount() {
     .then(data => {
         document.getElementById("result").innerHTML =
             "Account Created! Account No: " + data.accno;
-        loadAccounts();
+
+        addRow(data);
     });
 }
 
-function loadAccounts() {
-    fetch(baseUrl + "/all")
-        .then(res => res.json())
-        .then(data => {
-            let rows = "";
-            data.forEach(a => {
-                rows += `<tr>
-                    <td>${a.accno}</td>
-                    <td>${a.accounttype}</td>
-                    <td>${a.ifsccode}</td>
-                    <td>${a.bankname}</td>
-                    <td>${a.bankaddress}</td>
-                    <td>${a.balance}</td>
-                    <td>${a.email}</td>
-                    <td>
-                        <button onclick="deleteAcc(${a.accid})">Delete</button>
-                    </td>
-                </tr>`;
-            });
-            document.getElementById("tableBody").innerHTML = rows;
-        });
+function addRow(a) {
+    let row = `<tr id="row-${a.accid}">
+        <td>${a.accno}</td>
+        <td>${a.accounttype}</td>
+        <td>${a.ifsccode}</td>
+        <td>${a.bankname}</td>
+        <td>${a.bankaddress}</td>
+        <td>${a.balance}</td>
+        <td>${a.email}</td>
+        <td>
+            <button onclick="deleteAcc(${a.accid})">Delete</button>
+        </td>
+    </tr>`;
+
+    document.getElementById("tableBody").innerHTML += row;
 }
 
 function deleteAcc(id) {
@@ -56,6 +51,6 @@ function deleteAcc(id) {
     .then(res => res.text())
     .then(msg => {
         alert(msg);
-        loadAccounts();
+        document.getElementById("row-" + id).remove();
     });
 }

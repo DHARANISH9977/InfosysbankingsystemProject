@@ -1,0 +1,31 @@
+body {
+  font-family: Arial;
+  background: #f4f6f9;
+  text-align: center;
+}
+
+h1 {
+  color: #c0392b;
+}
+
+table {
+  width: 70%;
+  margin: 30px auto;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background: #2c3e50;
+  color: white;
+}
+
+.low {
+  color: red;
+  font-weight: bold;
+}
